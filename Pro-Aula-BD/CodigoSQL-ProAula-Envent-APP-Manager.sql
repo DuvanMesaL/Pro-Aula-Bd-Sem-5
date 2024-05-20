@@ -592,8 +592,6 @@ CALL InsertarPlanificacion(1, 1, 'Tipo C', 'Detalles de la Planificación C');
 -- Call InsertarRolPermiso to insert data into rol-permiso
 CALL InsertarRolPermiso(1, 2);
 
-
-
 -- #### WAYS TO GET DATA ####
 -- 1. Basic Column Selection
 
@@ -868,3 +866,86 @@ SELECT Nombre, Capacidad FROM Proveedores;
 SELECT Nombre, Estado FROM EmpresasOrganizadoras
 UNION ALL
 SELECT Nombre, Estado FROM Lugares;
+
+
+-- CREATE VEWS
+
+-- ### 1. View to List All Events Organized by Each Company ###
+CREATE VIEW ViewEventsByCompany AS
+SELECT e.EventoID, e.Nombre AS EventName, e.Tipo AS EventType, e.Fecha AS EventDate, l.Nombre AS Venue, CONCAT(u.PrimerNombre, ' ', u.PrimerApellido) AS Client
+FROM Eventos e
+JOIN Lugares l ON e.LugarID = l.LugarID
+JOIN Usuarios u ON e.ClienteID = u.UsuarioID;
+
+-- ### 2. View to List All Providers Contracted for Each Event ###
+CREATE VIEW ViewProvidersByEvent AS
+SELECT e.EventoID, e.Nombre AS EventName, p.ProveedorID, p.Nombre AS ProviderName, p.Tipo AS ProviderType, pp.Detalles AS Details
+FROM Planificaciones pp
+JOIN Proveedores p ON pp.ProveedorID = p.ProveedorID
+JOIN Eventos e ON pp.EventoID = e.EventoID;
+
+-- ### 3. View to Show Contact Details (Phone and Email) of All Providers ###
+CREATE VIEW ViewContactDetailsProviders AS
+SELECT p.Nombre AS ProviderName, p.Correo AS Email, tp.Numero AS Phone, tp.Emergencia AS Emergency
+FROM Proveedores p
+LEFT JOIN TelefonosProveedores tp ON p.ProveedorID = tp.ProveedorID;
+
+-- ### 4. View to Get the List of Clients with Their Upcoming Events ### 
+CREATE VIEW ViewClientsWithUpcomingEvents AS
+SELECT u.UsuarioID AS ClientID, CONCAT(u.PrimerNombre, ' ', u.PrimerApellido) AS Client, e.Nombre AS EventName, e.Fecha AS EventDate
+FROM Usuarios u
+JOIN Eventos e ON u.UsuarioID = e.ClienteID
+WHERE e.Fecha >= CURDATE();
+
+-- ### 5. View to Query Events Organized at Each Venue ###
+CREATE VIEW ViewEventsByVenue AS
+SELECT 
+    l.LugarID AS VenueID, 
+    l.Nombre AS VenueName, 
+    e.EventoID AS EventID, 
+    e.Nombre AS EventName, 
+    e.Tipo AS EventType, 
+    e.Fecha AS EventDate, 
+    CONCAT(u.PrimerNombre, ' ', u.PrimerApellido) AS Client
+FROM 
+    Lugares l
+JOIN 
+    Eventos e ON l.LugarID = e.LugarID
+JOIN 
+    Usuarios u ON e.ClienteID = u.UsuarioID;
+
+-- ### 6. View to Get the List of Budgets Sent for Each Event ###
+CREATE VIEW ViewBudgetsByEvent AS
+SELECT e.EventoID AS EventID, e.Nombre AS EventName, p.PresupuestoID AS BudgetID, p.Monto AS Amount, p.FechaEnvio AS SentDate, eo.Nombre AS Company, p.Descripcion AS Description
+FROM Presupuestos p
+JOIN Eventos e ON p.EventoID = e.EventoID
+JOIN EmpresasOrganizadoras eo ON p.EmpresaID = eo.EmpresaID;
+
+-- ### 7. View to List the Permissions Associated with Each Role ### 
+CREATE VIEW ViewPermissionsByRole AS
+SELECT r.Nombre AS Role, pe.Nombre AS Permission
+FROM RolPermiso rp
+JOIN Roles r ON rp.RolID = r.RolID
+JOIN Permisos pe ON rp.PermisoID = pe.PermisoID;
+
+-- ### 8. View to Query Events That Require a Specific Provider ###
+CREATE VIEW ViewEventsByProvider AS
+SELECT p.ProveedorID AS ProviderID, p.Nombre AS ProviderName, e.EventoID AS EventID, e.Nombre AS EventName, e.Tipo AS EventType, e.Fecha AS EventDate
+FROM Planificaciones pp
+JOIN Proveedores p ON pp.ProveedorID = p.ProveedorID
+JOIN Eventos e ON pp.EventoID = e.EventoID;
+
+-- ### 9. View to List Contact Details (Phone and Email) of All Organizing Companies ###
+CREATE VIEW ViewContactDetailsCompanies AS
+SELECT eo.Nombre AS CompanyName, eo.Correo AS Email, te.Numero AS Phone, te.Tipo AS PhoneType
+FROM EmpresasOrganizadoras eo
+LEFT JOIN TelefonosEmpresa te ON eo.EmpresaID = te.EmpresaID;
+
+-- ### 10. View to Get the List of Events Along with Their Respective Clients and Involved Providers ###
+CREATE VIEW ViewEventsClientsProviders AS
+SELECT e.EventoID AS EventID, e.Nombre AS EventName, CONCAT(u.PrimerNombre, ' ', u.PrimerApellido) AS Client, p.Nombre AS Provider, pp.Tipo AS ProviderType, pp.Detalles AS Details
+FROM Eventos e
+JOIN Usuarios u ON e.ClienteID = u.UsuarioID
+JOIN Planificaciones pp ON e.EventoID = pp.EventoID
+JOIN Proveedores p ON pp.ProveedorID = p.ProveedorID;
+

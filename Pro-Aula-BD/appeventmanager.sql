@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: appeventmanager
 -- ------------------------------------------------------
--- Server version	8.2.0
+-- Server version	5.7.11
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `empresasorganizadoras`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `empresasorganizadoras` (
-  `EmpresaID` int NOT NULL AUTO_INCREMENT,
+  `EmpresaID` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(255) DEFAULT NULL,
   `Correo` varchar(255) DEFAULT NULL,
   `Calle` varchar(255) DEFAULT NULL,
@@ -53,12 +53,12 @@ DROP TABLE IF EXISTS `eventos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `eventos` (
-  `EventoID` int NOT NULL AUTO_INCREMENT,
+  `EventoID` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(255) DEFAULT NULL,
   `Tipo` varchar(50) DEFAULT NULL,
   `Fecha` date DEFAULT NULL,
-  `LugarID` int DEFAULT NULL,
-  `ClienteID` int DEFAULT NULL,
+  `LugarID` int(11) DEFAULT NULL,
+  `ClienteID` int(11) DEFAULT NULL,
   `Descripcion` text,
   PRIMARY KEY (`EventoID`),
   KEY `FK_Eventos_Lugares` (`LugarID`),
@@ -86,14 +86,14 @@ DROP TABLE IF EXISTS `lugares`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `lugares` (
-  `LugarID` int NOT NULL AUTO_INCREMENT,
+  `LugarID` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(255) DEFAULT NULL,
   `Calle` varchar(255) DEFAULT NULL,
   `Ciudad` varchar(100) DEFAULT NULL,
   `Estado` varchar(100) DEFAULT NULL,
   `CodigoPostal` varchar(10) DEFAULT NULL,
   `Tipo` varchar(50) DEFAULT NULL,
-  `Capacidad` int DEFAULT NULL,
+  `Capacidad` int(11) DEFAULT NULL,
   `Descripcion` text,
   PRIMARY KEY (`LugarID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
@@ -117,7 +117,7 @@ DROP TABLE IF EXISTS `permisos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `permisos` (
-  `PermisoID` int NOT NULL AUTO_INCREMENT,
+  `PermisoID` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`PermisoID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
@@ -141,9 +141,9 @@ DROP TABLE IF EXISTS `planificaciones`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `planificaciones` (
-  `PlanificacionID` int NOT NULL AUTO_INCREMENT,
-  `EventoID` int DEFAULT NULL,
-  `ProveedorID` int DEFAULT NULL,
+  `PlanificacionID` int(11) NOT NULL AUTO_INCREMENT,
+  `EventoID` int(11) DEFAULT NULL,
+  `ProveedorID` int(11) DEFAULT NULL,
   `Tipo` varchar(50) DEFAULT NULL,
   `Detalles` text,
   PRIMARY KEY (`PlanificacionID`),
@@ -172,9 +172,9 @@ DROP TABLE IF EXISTS `presupuestos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `presupuestos` (
-  `PresupuestoID` int NOT NULL AUTO_INCREMENT,
-  `EventoID` int DEFAULT NULL,
-  `EmpresaID` int DEFAULT NULL,
+  `PresupuestoID` int(11) NOT NULL AUTO_INCREMENT,
+  `EventoID` int(11) DEFAULT NULL,
+  `EmpresaID` int(11) DEFAULT NULL,
   `Monto` decimal(10,2) DEFAULT NULL,
   `FechaEnvio` date DEFAULT NULL,
   `Descripcion` text,
@@ -204,7 +204,7 @@ DROP TABLE IF EXISTS `proveedores`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `proveedores` (
-  `ProveedorID` int NOT NULL AUTO_INCREMENT,
+  `ProveedorID` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(255) DEFAULT NULL,
   `Correo` varchar(255) DEFAULT NULL,
   `Tipo` varchar(50) DEFAULT NULL,
@@ -231,7 +231,7 @@ DROP TABLE IF EXISTS `roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roles` (
-  `RolID` int NOT NULL AUTO_INCREMENT,
+  `RolID` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`RolID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
@@ -255,9 +255,9 @@ DROP TABLE IF EXISTS `rolpermiso`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `rolpermiso` (
-  `RolPermisoID` int NOT NULL AUTO_INCREMENT,
-  `RolID` int DEFAULT NULL,
-  `PermisoID` int DEFAULT NULL,
+  `RolPermisoID` int(11) NOT NULL AUTO_INCREMENT,
+  `RolID` int(11) DEFAULT NULL,
+  `PermisoID` int(11) DEFAULT NULL,
   PRIMARY KEY (`RolPermisoID`),
   KEY `FK_RolPermiso_Roles` (`RolID`),
   KEY `FK_RolPermiso_Permisos` (`PermisoID`),
@@ -284,8 +284,8 @@ DROP TABLE IF EXISTS `telefonosempresa`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `telefonosempresa` (
-  `TelefonoID` int NOT NULL AUTO_INCREMENT,
-  `EmpresaID` int DEFAULT NULL,
+  `TelefonoID` int(11) NOT NULL AUTO_INCREMENT,
+  `EmpresaID` int(11) DEFAULT NULL,
   `Numero` varchar(20) DEFAULT NULL,
   `Tipo` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`TelefonoID`),
@@ -312,8 +312,8 @@ DROP TABLE IF EXISTS `telefonosproveedores`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `telefonosproveedores` (
-  `TelefonoID` int NOT NULL AUTO_INCREMENT,
-  `ProveedorID` int DEFAULT NULL,
+  `TelefonoID` int(11) NOT NULL AUTO_INCREMENT,
+  `ProveedorID` int(11) DEFAULT NULL,
   `Numero` varchar(20) DEFAULT NULL,
   `Emergencia` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`TelefonoID`),
@@ -340,8 +340,8 @@ DROP TABLE IF EXISTS `telefonosusuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `telefonosusuario` (
-  `TelefonoID` int NOT NULL AUTO_INCREMENT,
-  `UsuarioID` int DEFAULT NULL,
+  `TelefonoID` int(11) NOT NULL AUTO_INCREMENT,
+  `UsuarioID` int(11) DEFAULT NULL,
   `Numero` varchar(20) DEFAULT NULL,
   `Tipo` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`TelefonoID`),
@@ -368,7 +368,7 @@ DROP TABLE IF EXISTS `usuarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuarios` (
-  `UsuarioID` int NOT NULL AUTO_INCREMENT,
+  `UsuarioID` int(11) NOT NULL AUTO_INCREMENT,
   `PrimerNombre` varchar(255) DEFAULT NULL,
   `SegundoNombre` varchar(255) DEFAULT NULL,
   `PrimerApellido` varchar(255) DEFAULT NULL,
@@ -379,7 +379,7 @@ CREATE TABLE `usuarios` (
   `Ciudad` varchar(100) DEFAULT NULL,
   `Estado` varchar(100) DEFAULT NULL,
   `CodigoPostal` varchar(10) DEFAULT NULL,
-  `RolID` int DEFAULT NULL,
+  `RolID` int(11) DEFAULT NULL,
   PRIMARY KEY (`UsuarioID`),
   KEY `FK_Usuarios_Roles` (`RolID`),
   CONSTRAINT `FK_Usuarios_Roles` FOREIGN KEY (`RolID`) REFERENCES `roles` (`RolID`)
@@ -395,6 +395,348 @@ LOCK TABLES `usuarios` WRITE;
 INSERT INTO `usuarios` VALUES (1,'Juan','Carlos','Pérez','García','juan.perez@example.com','password123','Calle Falsa 123','Ciudad','Estado','12345',1),(2,'María','Luisa','Martínez','López','maria.martinez@example.com','password123','Avenida Siempre Viva 742','Otra Ciudad','Otro Estado','54321',2),(3,'Juan','Carlos','Pérez','García','juan.perez@example.com','password123','Calle Falsa 123','Ciudad','Estado','12345',1),(4,'María','Luisa','Martínez','López','maria.martinez@example.com','password123','Avenida Siempre Viva 742','Otra Ciudad','Otro Estado','54321',2),(5,'Luis','Fernando','Gómez','Pérez','luis.gomez@example.com','password123','Calle Nueva 123','Ciudad X','Estado Y','67890',1);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `viewbudgetsbyevent`
+--
+
+DROP TABLE IF EXISTS `viewbudgetsbyevent`;
+/*!50001 DROP VIEW IF EXISTS `viewbudgetsbyevent`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `viewbudgetsbyevent` AS SELECT 
+ 1 AS `EventID`,
+ 1 AS `EventName`,
+ 1 AS `BudgetID`,
+ 1 AS `Amount`,
+ 1 AS `SentDate`,
+ 1 AS `Company`,
+ 1 AS `Description`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `viewclientswithupcomingevents`
+--
+
+DROP TABLE IF EXISTS `viewclientswithupcomingevents`;
+/*!50001 DROP VIEW IF EXISTS `viewclientswithupcomingevents`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `viewclientswithupcomingevents` AS SELECT 
+ 1 AS `ClientID`,
+ 1 AS `Client`,
+ 1 AS `EventName`,
+ 1 AS `EventDate`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `viewcontactdetailscompanies`
+--
+
+DROP TABLE IF EXISTS `viewcontactdetailscompanies`;
+/*!50001 DROP VIEW IF EXISTS `viewcontactdetailscompanies`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `viewcontactdetailscompanies` AS SELECT 
+ 1 AS `CompanyName`,
+ 1 AS `Email`,
+ 1 AS `Phone`,
+ 1 AS `PhoneType`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `viewcontactdetailsproviders`
+--
+
+DROP TABLE IF EXISTS `viewcontactdetailsproviders`;
+/*!50001 DROP VIEW IF EXISTS `viewcontactdetailsproviders`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `viewcontactdetailsproviders` AS SELECT 
+ 1 AS `ProviderName`,
+ 1 AS `Email`,
+ 1 AS `Phone`,
+ 1 AS `Emergency`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `vieweventsbycompany`
+--
+
+DROP TABLE IF EXISTS `vieweventsbycompany`;
+/*!50001 DROP VIEW IF EXISTS `vieweventsbycompany`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `vieweventsbycompany` AS SELECT 
+ 1 AS `EventoID`,
+ 1 AS `EventName`,
+ 1 AS `EventType`,
+ 1 AS `EventDate`,
+ 1 AS `Venue`,
+ 1 AS `Client`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `vieweventsbyprovider`
+--
+
+DROP TABLE IF EXISTS `vieweventsbyprovider`;
+/*!50001 DROP VIEW IF EXISTS `vieweventsbyprovider`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `vieweventsbyprovider` AS SELECT 
+ 1 AS `ProviderID`,
+ 1 AS `ProviderName`,
+ 1 AS `EventID`,
+ 1 AS `EventName`,
+ 1 AS `EventType`,
+ 1 AS `EventDate`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `vieweventsbyvenue`
+--
+
+DROP TABLE IF EXISTS `vieweventsbyvenue`;
+/*!50001 DROP VIEW IF EXISTS `vieweventsbyvenue`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `vieweventsbyvenue` AS SELECT 
+ 1 AS `VenueID`,
+ 1 AS `VenueName`,
+ 1 AS `EventID`,
+ 1 AS `EventName`,
+ 1 AS `EventType`,
+ 1 AS `EventDate`,
+ 1 AS `Client`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `vieweventsclientsproviders`
+--
+
+DROP TABLE IF EXISTS `vieweventsclientsproviders`;
+/*!50001 DROP VIEW IF EXISTS `vieweventsclientsproviders`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `vieweventsclientsproviders` AS SELECT 
+ 1 AS `EventID`,
+ 1 AS `EventName`,
+ 1 AS `Client`,
+ 1 AS `Provider`,
+ 1 AS `ProviderType`,
+ 1 AS `Details`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `viewpermissionsbyrole`
+--
+
+DROP TABLE IF EXISTS `viewpermissionsbyrole`;
+/*!50001 DROP VIEW IF EXISTS `viewpermissionsbyrole`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `viewpermissionsbyrole` AS SELECT 
+ 1 AS `Role`,
+ 1 AS `Permission`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `viewprovidersbyevent`
+--
+
+DROP TABLE IF EXISTS `viewprovidersbyevent`;
+/*!50001 DROP VIEW IF EXISTS `viewprovidersbyevent`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `viewprovidersbyevent` AS SELECT 
+ 1 AS `EventoID`,
+ 1 AS `EventName`,
+ 1 AS `ProveedorID`,
+ 1 AS `ProviderName`,
+ 1 AS `ProviderType`,
+ 1 AS `Details`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Final view structure for view `viewbudgetsbyevent`
+--
+
+/*!50001 DROP VIEW IF EXISTS `viewbudgetsbyevent`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `viewbudgetsbyevent` AS select `e`.`EventoID` AS `EventID`,`e`.`Nombre` AS `EventName`,`p`.`PresupuestoID` AS `BudgetID`,`p`.`Monto` AS `Amount`,`p`.`FechaEnvio` AS `SentDate`,`eo`.`Nombre` AS `Company`,`p`.`Descripcion` AS `Description` from ((`presupuestos` `p` join `eventos` `e` on((`p`.`EventoID` = `e`.`EventoID`))) join `empresasorganizadoras` `eo` on((`p`.`EmpresaID` = `eo`.`EmpresaID`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `viewclientswithupcomingevents`
+--
+
+/*!50001 DROP VIEW IF EXISTS `viewclientswithupcomingevents`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `viewclientswithupcomingevents` AS select `u`.`UsuarioID` AS `ClientID`,concat(`u`.`PrimerNombre`,' ',`u`.`PrimerApellido`) AS `Client`,`e`.`Nombre` AS `EventName`,`e`.`Fecha` AS `EventDate` from (`usuarios` `u` join `eventos` `e` on((`u`.`UsuarioID` = `e`.`ClienteID`))) where (`e`.`Fecha` >= curdate()) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `viewcontactdetailscompanies`
+--
+
+/*!50001 DROP VIEW IF EXISTS `viewcontactdetailscompanies`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `viewcontactdetailscompanies` AS select `eo`.`Nombre` AS `CompanyName`,`eo`.`Correo` AS `Email`,`te`.`Numero` AS `Phone`,`te`.`Tipo` AS `PhoneType` from (`empresasorganizadoras` `eo` left join `telefonosempresa` `te` on((`eo`.`EmpresaID` = `te`.`EmpresaID`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `viewcontactdetailsproviders`
+--
+
+/*!50001 DROP VIEW IF EXISTS `viewcontactdetailsproviders`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `viewcontactdetailsproviders` AS select `p`.`Nombre` AS `ProviderName`,`p`.`Correo` AS `Email`,`tp`.`Numero` AS `Phone`,`tp`.`Emergencia` AS `Emergency` from (`proveedores` `p` left join `telefonosproveedores` `tp` on((`p`.`ProveedorID` = `tp`.`ProveedorID`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `vieweventsbycompany`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vieweventsbycompany`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vieweventsbycompany` AS select `e`.`EventoID` AS `EventoID`,`e`.`Nombre` AS `EventName`,`e`.`Tipo` AS `EventType`,`e`.`Fecha` AS `EventDate`,`l`.`Nombre` AS `Venue`,concat(`u`.`PrimerNombre`,' ',`u`.`PrimerApellido`) AS `Client` from ((`eventos` `e` join `lugares` `l` on((`e`.`LugarID` = `l`.`LugarID`))) join `usuarios` `u` on((`e`.`ClienteID` = `u`.`UsuarioID`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `vieweventsbyprovider`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vieweventsbyprovider`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vieweventsbyprovider` AS select `p`.`ProveedorID` AS `ProviderID`,`p`.`Nombre` AS `ProviderName`,`e`.`EventoID` AS `EventID`,`e`.`Nombre` AS `EventName`,`e`.`Tipo` AS `EventType`,`e`.`Fecha` AS `EventDate` from ((`planificaciones` `pp` join `proveedores` `p` on((`pp`.`ProveedorID` = `p`.`ProveedorID`))) join `eventos` `e` on((`pp`.`EventoID` = `e`.`EventoID`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `vieweventsbyvenue`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vieweventsbyvenue`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vieweventsbyvenue` AS select `l`.`LugarID` AS `VenueID`,`l`.`Nombre` AS `VenueName`,`e`.`EventoID` AS `EventID`,`e`.`Nombre` AS `EventName`,`e`.`Tipo` AS `EventType`,`e`.`Fecha` AS `EventDate`,concat(`u`.`PrimerNombre`,' ',`u`.`PrimerApellido`) AS `Client` from ((`lugares` `l` join `eventos` `e` on((`l`.`LugarID` = `e`.`LugarID`))) join `usuarios` `u` on((`e`.`ClienteID` = `u`.`UsuarioID`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `vieweventsclientsproviders`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vieweventsclientsproviders`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vieweventsclientsproviders` AS select `e`.`EventoID` AS `EventID`,`e`.`Nombre` AS `EventName`,concat(`u`.`PrimerNombre`,' ',`u`.`PrimerApellido`) AS `Client`,`p`.`Nombre` AS `Provider`,`pp`.`Tipo` AS `ProviderType`,`pp`.`Detalles` AS `Details` from (((`eventos` `e` join `usuarios` `u` on((`e`.`ClienteID` = `u`.`UsuarioID`))) join `planificaciones` `pp` on((`e`.`EventoID` = `pp`.`EventoID`))) join `proveedores` `p` on((`pp`.`ProveedorID` = `p`.`ProveedorID`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `viewpermissionsbyrole`
+--
+
+/*!50001 DROP VIEW IF EXISTS `viewpermissionsbyrole`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `viewpermissionsbyrole` AS select `r`.`Nombre` AS `Role`,`pe`.`Nombre` AS `Permission` from ((`rolpermiso` `rp` join `roles` `r` on((`rp`.`RolID` = `r`.`RolID`))) join `permisos` `pe` on((`rp`.`PermisoID` = `pe`.`PermisoID`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `viewprovidersbyevent`
+--
+
+/*!50001 DROP VIEW IF EXISTS `viewprovidersbyevent`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `viewprovidersbyevent` AS select `e`.`EventoID` AS `EventoID`,`e`.`Nombre` AS `EventName`,`p`.`ProveedorID` AS `ProveedorID`,`p`.`Nombre` AS `ProviderName`,`p`.`Tipo` AS `ProviderType`,`pp`.`Detalles` AS `Details` from ((`planificaciones` `pp` join `proveedores` `p` on((`pp`.`ProveedorID` = `p`.`ProveedorID`))) join `eventos` `e` on((`pp`.`EventoID` = `e`.`EventoID`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -405,4 +747,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-20  0:26:01
+-- Dump completed on 2024-05-20  1:56:18
