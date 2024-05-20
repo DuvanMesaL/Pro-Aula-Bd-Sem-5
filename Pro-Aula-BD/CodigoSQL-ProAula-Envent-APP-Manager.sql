@@ -788,3 +788,83 @@ SELECT eo.Nombre, eo.Ciudad,
 (SELECT COUNT(*) FROM Presupuestos p WHERE p.EmpresaID = eo.EmpresaID) AS TotalPresupuestos
 FROM EmpresasOrganizadoras eo;
  
+-- 10. Using Aggregate Functions
+
+-- COUNT
+SELECT COUNT(*) FROM Usuarios;
+SELECT COUNT(*) FROM Eventos;
+SELECT COUNT(*) FROM Proveedores;
+SELECT COUNT(*) FROM Lugares;
+SELECT COUNT(*) FROM EmpresasOrganizadoras;
+
+-- AVG
+SELECT AVG(Edad) FROM Usuarios;
+SELECT AVG(Capacidad) FROM Lugares;
+SELECT AVG(Monto) FROM Presupuestos;
+SELECT AVG(Empleados) FROM EmpresasOrganizadoras;
+SELECT AVG(Precio) FROM Proveedores;
+
+-- SUM
+SELECT SUM(Monto) FROM Presupuestos;
+SELECT SUM(Capacidad) FROM Lugares;
+SELECT SUM(Empleados) FROM EmpresasOrganizadoras;
+SELECT SUM(Precio) FROM Proveedores;
+SELECT SUM(Edad) FROM Usuarios;
+
+-- MIN
+SELECT MIN(Edad) FROM Usuarios;
+SELECT MIN(Capacidad) FROM Lugares;
+SELECT MIN(Monto) FROM Presupuestos;
+SELECT MIN(Empleados) FROM EmpresasOrganizadoras;
+SELECT MIN(Precio) FROM Proveedores;
+
+-- MAX
+SELECT MAX(Edad) FROM Usuarios;
+SELECT MAX(Capacidad) FROM Lugares;
+SELECT MAX(Monto) FROM Presupuestos;
+SELECT MAX(Empleados) FROM EmpresasOrganizadoras;
+SELECT MAX(Precio) FROM Proveedores;
+
+-- 11. UNION Queries
+
+-- UNION of two queries
+SELECT Nombre, Ciudad FROM Usuarios
+UNION
+SELECT Nombre, Ciudad FROM Proveedores;
+
+SELECT Nombre, Ciudad FROM EmpresasOrganizadoras
+UNION
+SELECT Nombre, Ciudad FROM Lugares;
+
+SELECT Nombre, Tipo FROM Eventos
+UNION
+SELECT Nombre, Tipo FROM Planificaciones;
+
+SELECT Nombre, Capacidad FROM Lugares
+UNION
+SELECT Nombre, Capacidad FROM Proveedores;
+
+SELECT Nombre, Estado FROM EmpresasOrganizadoras
+UNION
+SELECT Nombre, Estado FROM Lugares;
+
+-- UNION ALL (includes duplicates)
+SELECT Nombre, Ciudad FROM Usuarios
+UNION ALL
+SELECT Nombre, Ciudad FROM Proveedores;
+
+SELECT Nombre, Ciudad FROM EmpresasOrganizadoras
+UNION ALL
+SELECT Nombre, Ciudad FROM Lugares;
+
+SELECT Nombre, Tipo FROM Eventos
+UNION ALL
+SELECT Nombre, Tipo FROM Planificaciones;
+
+SELECT Nombre, Capacidad FROM Lugares
+UNION ALL
+SELECT Nombre, Capacidad FROM Proveedores;
+
+SELECT Nombre, Estado FROM EmpresasOrganizadoras
+UNION ALL
+SELECT Nombre, Estado FROM Lugares;
