@@ -867,6 +867,128 @@ SELECT Nombre, Estado FROM EmpresasOrganizadoras
 UNION ALL
 SELECT Nombre, Estado FROM Lugares;
 
+-- 12. CASE Queries
+
+-- Using CASE in SELECT
+SELECT PrimerNombre,
+CASE
+    WHEN Edad < 18 THEN 'Menor'
+    WHEN Edad >= 18 AND Edad < 65 THEN 'Adulto'
+    ELSE 'Senior'
+END AS CategoriaEdad
+FROM Usuarios;
+
+SELECT Nombre,
+CASE
+    WHEN Capacidad < 50 THEN 'Pequeño'
+    WHEN Capacidad >= 50 AND Capacidad < 200 THEN 'Mediano'
+    ELSE 'Grande'
+END AS CategoriaCapacidad
+FROM Lugares;
+
+SELECT Nombre,
+CASE
+    WHEN Tipo = 'Boda' THEN 'Evento Social'
+    WHEN Tipo = 'Cumpleaños' THEN 'Evento Familiar'
+    ELSE 'Otro Evento'
+END AS CategoriaEvento
+FROM Eventos;
+
+SELECT Nombre,
+CASE
+    WHEN Estado = 'Activo' THEN 'Empresa Activa'
+    WHEN Estado = 'Inactivo' THEN 'Empresa Inactiva'
+    ELSE 'Estado Desconocido'
+END AS EstadoEmpresa
+FROM EmpresasOrganizadoras;
+
+SELECT Nombre,
+CASE
+    WHEN Precio < 100 THEN 'Económico'
+    WHEN Precio >= 100 AND Precio < 500 THEN 'Moderado'
+    ELSE 'Caro'
+END AS CategoriaPrecio
+FROM Proveedores;
+
+-- 13. Selecting Distinct Values with DISTINCT
+
+-- Using DISTINCT
+SELECT DISTINCT Ciudad FROM Usuarios;
+SELECT DISTINCT Tipo FROM Eventos;
+SELECT DISTINCT Tipo FROM Proveedores;
+SELECT DISTINCT Estado FROM Lugares;
+SELECT DISTINCT Ciudad FROM EmpresasOrganizadoras;
+
+-- 14. Date and Time Functions
+
+-- CURRENT_DATE
+SELECT CURRENT_DATE;
+SELECT EventoID, Nombre FROM Eventos WHERE Fecha = CURRENT_DATE;
+SELECT Nombre FROM Usuarios WHERE FechaRegistro = CURRENT_DATE;
+SELECT Nombre FROM Proveedores WHERE FechaContrato = CURRENT_DATE;
+SELECT Nombre FROM EmpresasOrganizadoras WHERE FechaFundacion = CURRENT_DATE;
+
+-- CURRENT_TIME
+SELECT CURRENT_TIME;
+SELECT EventoID, Nombre FROM Eventos WHERE HoraInicio = CURRENT_TIME;
+SELECT Nombre FROM Usuarios WHERE HoraRegistro = CURRENT_TIME;
+SELECT Nombre FROM Proveedores WHERE HoraContrato = CURRENT_TIME;
+SELECT Nombre FROM EmpresasOrganizadoras WHERE HoraFundacion = CURRENT_TIME;
+
+-- DATE_FORMAT
+SELECT DATE_FORMAT(Fecha, '%Y-%m-%d') FROM Eventos;
+SELECT DATE_FORMAT(FechaRegistro, '%d/%m/%Y') FROM Usuarios;
+SELECT DATE_FORMAT(FechaContrato, '%M %d, %Y') FROM Proveedores;
+SELECT DATE_FORMAT(FechaFundacion, '%Y-%m-%d') FROM EmpresasOrganizadoras;
+SELECT DATE_FORMAT(Fecha, '%d-%m-%Y') FROM Lugares;
+
+-- 15. Complex Queries Combining the Above Techniques
+
+-- Combining various techniques
+SELECT t1.PrimerNombre, t2.Nombre AS Evento, COUNT(*)
+FROM Usuarios t1
+INNER JOIN Eventos t2 ON t1.UsuarioID = t2.ClienteID
+WHERE t1.Ciudad = 'Ciudad A'
+GROUP BY t1.PrimerNombre, t2.Nombre
+HAVING COUNT(*) > 1
+ORDER BY t1.PrimerNombre ASC
+LIMIT 10;
+
+SELECT t1.Nombre AS Evento, t2.Nombre AS Lugar, AVG(t2.Capacidad)
+FROM Eventos t1
+INNER JOIN Lugares t2 ON t1.LugarID = t2.LugarID
+WHERE t1.Fecha BETWEEN '2024-01-01' AND '2024-12-31'
+GROUP BY t1.Nombre, t2.Nombre
+HAVING AVG(t2.Capacidad) > 100
+ORDER BY t1.Nombre DESC
+LIMIT 5;
+
+SELECT t1.Nombre AS Proveedor, t2.Nombre AS Empresa, SUM(t2.Monto)
+FROM Proveedores t1
+INNER JOIN Presupuestos t2 ON t1.ProveedorID = t2.ProveedorID
+WHERE t1.Tipo = 'Fotógrafo'
+GROUP BY t1.Nombre, t2.Nombre
+HAVING SUM(t2.Monto) > 5000
+ORDER BY t1.Nombre ASC
+LIMIT 3;
+
+SELECT t1.Nombre AS Lugar, t2.Nombre AS Evento, COUNT(*)
+FROM Lugares t1
+INNER JOIN Eventos t2 ON t1.LugarID = t2.LugarID
+WHERE t1.Estado = 'Estado A'
+GROUP BY t1.Nombre, t2.Nombre
+HAVING COUNT(*) > 2
+ORDER BY t1.Nombre DESC
+LIMIT 7;
+
+SELECT t1.Nombre AS Empresa, t2.Nombre AS Ciudad, MAX(t2.Empleados)
+FROM EmpresasOrganizadoras t1
+INNER JOIN Usuarios t2 ON t1.EmpresaID = t2.EmpresaID
+WHERE t1.Estado = 'Activo'
+GROUP BY t1.Nombre, t2.Nombre
+HAVING MAX(t2.Empleados) > 50
+ORDER BY t1.Nombre ASC
+LIMIT 4;
 
 -- CREATE VEWS
 
@@ -948,4 +1070,3 @@ FROM Eventos e
 JOIN Usuarios u ON e.ClienteID = u.UsuarioID
 JOIN Planificaciones pp ON e.EventoID = pp.EventoID
 JOIN Proveedores p ON pp.ProveedorID = p.ProveedorID;
-

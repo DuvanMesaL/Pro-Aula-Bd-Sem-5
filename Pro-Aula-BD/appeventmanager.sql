@@ -1,8 +1,10 @@
+CREATE DATABASE  IF NOT EXISTS `appeventmanager` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `appeventmanager`;
 -- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
 -- Host: localhost    Database: appeventmanager
 -- ------------------------------------------------------
--- Server version	5.7.11
+-- Server version	8.2.0
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,7 +25,7 @@ DROP TABLE IF EXISTS `empresasorganizadoras`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `empresasorganizadoras` (
-  `EmpresaID` int(11) NOT NULL AUTO_INCREMENT,
+  `EmpresaID` int NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(255) DEFAULT NULL,
   `Correo` varchar(255) DEFAULT NULL,
   `Calle` varchar(255) DEFAULT NULL,
@@ -53,12 +55,12 @@ DROP TABLE IF EXISTS `eventos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `eventos` (
-  `EventoID` int(11) NOT NULL AUTO_INCREMENT,
+  `EventoID` int NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(255) DEFAULT NULL,
   `Tipo` varchar(50) DEFAULT NULL,
   `Fecha` date DEFAULT NULL,
-  `LugarID` int(11) DEFAULT NULL,
-  `ClienteID` int(11) DEFAULT NULL,
+  `LugarID` int DEFAULT NULL,
+  `ClienteID` int DEFAULT NULL,
   `Descripcion` text,
   PRIMARY KEY (`EventoID`),
   KEY `FK_Eventos_Lugares` (`LugarID`),
@@ -86,14 +88,14 @@ DROP TABLE IF EXISTS `lugares`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `lugares` (
-  `LugarID` int(11) NOT NULL AUTO_INCREMENT,
+  `LugarID` int NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(255) DEFAULT NULL,
   `Calle` varchar(255) DEFAULT NULL,
   `Ciudad` varchar(100) DEFAULT NULL,
   `Estado` varchar(100) DEFAULT NULL,
   `CodigoPostal` varchar(10) DEFAULT NULL,
   `Tipo` varchar(50) DEFAULT NULL,
-  `Capacidad` int(11) DEFAULT NULL,
+  `Capacidad` int DEFAULT NULL,
   `Descripcion` text,
   PRIMARY KEY (`LugarID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
@@ -117,7 +119,7 @@ DROP TABLE IF EXISTS `permisos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `permisos` (
-  `PermisoID` int(11) NOT NULL AUTO_INCREMENT,
+  `PermisoID` int NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`PermisoID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
@@ -141,9 +143,9 @@ DROP TABLE IF EXISTS `planificaciones`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `planificaciones` (
-  `PlanificacionID` int(11) NOT NULL AUTO_INCREMENT,
-  `EventoID` int(11) DEFAULT NULL,
-  `ProveedorID` int(11) DEFAULT NULL,
+  `PlanificacionID` int NOT NULL AUTO_INCREMENT,
+  `EventoID` int DEFAULT NULL,
+  `ProveedorID` int DEFAULT NULL,
   `Tipo` varchar(50) DEFAULT NULL,
   `Detalles` text,
   PRIMARY KEY (`PlanificacionID`),
@@ -172,9 +174,9 @@ DROP TABLE IF EXISTS `presupuestos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `presupuestos` (
-  `PresupuestoID` int(11) NOT NULL AUTO_INCREMENT,
-  `EventoID` int(11) DEFAULT NULL,
-  `EmpresaID` int(11) DEFAULT NULL,
+  `PresupuestoID` int NOT NULL AUTO_INCREMENT,
+  `EventoID` int DEFAULT NULL,
+  `EmpresaID` int DEFAULT NULL,
   `Monto` decimal(10,2) DEFAULT NULL,
   `FechaEnvio` date DEFAULT NULL,
   `Descripcion` text,
@@ -204,7 +206,7 @@ DROP TABLE IF EXISTS `proveedores`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `proveedores` (
-  `ProveedorID` int(11) NOT NULL AUTO_INCREMENT,
+  `ProveedorID` int NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(255) DEFAULT NULL,
   `Correo` varchar(255) DEFAULT NULL,
   `Tipo` varchar(50) DEFAULT NULL,
@@ -231,7 +233,7 @@ DROP TABLE IF EXISTS `roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roles` (
-  `RolID` int(11) NOT NULL AUTO_INCREMENT,
+  `RolID` int NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`RolID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
@@ -255,9 +257,9 @@ DROP TABLE IF EXISTS `rolpermiso`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `rolpermiso` (
-  `RolPermisoID` int(11) NOT NULL AUTO_INCREMENT,
-  `RolID` int(11) DEFAULT NULL,
-  `PermisoID` int(11) DEFAULT NULL,
+  `RolPermisoID` int NOT NULL AUTO_INCREMENT,
+  `RolID` int DEFAULT NULL,
+  `PermisoID` int DEFAULT NULL,
   PRIMARY KEY (`RolPermisoID`),
   KEY `FK_RolPermiso_Roles` (`RolID`),
   KEY `FK_RolPermiso_Permisos` (`PermisoID`),
@@ -284,8 +286,8 @@ DROP TABLE IF EXISTS `telefonosempresa`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `telefonosempresa` (
-  `TelefonoID` int(11) NOT NULL AUTO_INCREMENT,
-  `EmpresaID` int(11) DEFAULT NULL,
+  `TelefonoID` int NOT NULL AUTO_INCREMENT,
+  `EmpresaID` int DEFAULT NULL,
   `Numero` varchar(20) DEFAULT NULL,
   `Tipo` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`TelefonoID`),
@@ -312,8 +314,8 @@ DROP TABLE IF EXISTS `telefonosproveedores`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `telefonosproveedores` (
-  `TelefonoID` int(11) NOT NULL AUTO_INCREMENT,
-  `ProveedorID` int(11) DEFAULT NULL,
+  `TelefonoID` int NOT NULL AUTO_INCREMENT,
+  `ProveedorID` int DEFAULT NULL,
   `Numero` varchar(20) DEFAULT NULL,
   `Emergencia` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`TelefonoID`),
@@ -340,8 +342,8 @@ DROP TABLE IF EXISTS `telefonosusuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `telefonosusuario` (
-  `TelefonoID` int(11) NOT NULL AUTO_INCREMENT,
-  `UsuarioID` int(11) DEFAULT NULL,
+  `TelefonoID` int NOT NULL AUTO_INCREMENT,
+  `UsuarioID` int DEFAULT NULL,
   `Numero` varchar(20) DEFAULT NULL,
   `Tipo` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`TelefonoID`),
@@ -368,7 +370,7 @@ DROP TABLE IF EXISTS `usuarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuarios` (
-  `UsuarioID` int(11) NOT NULL AUTO_INCREMENT,
+  `UsuarioID` int NOT NULL AUTO_INCREMENT,
   `PrimerNombre` varchar(255) DEFAULT NULL,
   `SegundoNombre` varchar(255) DEFAULT NULL,
   `PrimerApellido` varchar(255) DEFAULT NULL,
@@ -379,7 +381,7 @@ CREATE TABLE `usuarios` (
   `Ciudad` varchar(100) DEFAULT NULL,
   `Estado` varchar(100) DEFAULT NULL,
   `CodigoPostal` varchar(10) DEFAULT NULL,
-  `RolID` int(11) DEFAULT NULL,
+  `RolID` int DEFAULT NULL,
   PRIMARY KEY (`UsuarioID`),
   KEY `FK_Usuarios_Roles` (`RolID`),
   CONSTRAINT `FK_Usuarios_Roles` FOREIGN KEY (`RolID`) REFERENCES `roles` (`RolID`)
@@ -747,4 +749,8 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-20  1:56:18
+<<<<<<< HEAD
+-- Dump completed on 2024-05-20  1:44:57
+=======
+-- Dump completed on 2024-05-20  0:26:01
+>>>>>>> 330afb3f9e2534a7bd6ab2d7353101e4779cacaf
