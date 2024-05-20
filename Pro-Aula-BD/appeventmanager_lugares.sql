@@ -33,7 +33,7 @@ CREATE TABLE `lugares` (
   `Capacidad` int(11) DEFAULT NULL,
   `Descripcion` text,
   PRIMARY KEY (`LugarID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,6 +42,7 @@ CREATE TABLE `lugares` (
 
 LOCK TABLES `lugares` WRITE;
 /*!40000 ALTER TABLE `lugares` DISABLE KEYS */;
+INSERT INTO `lugares` VALUES (1,'Lugar A','Calle Lugar 1','Ciudad A','Estado A','11111','Tipo A',100,'Descripción del Lugar A'),(2,'Lugar B','Calle Lugar 2','Ciudad B','Estado B','22222','Tipo B',200,'Descripción del Lugar B'),(3,'Lugar A','Calle Lugar 1','Ciudad A','Estado A','11111','Tipo A',100,'Descripción del Lugar A'),(4,'Lugar B','Calle Lugar 2','Ciudad B','Estado B','22222','Tipo B',200,'Descripción del Lugar B'),(5,'Lugar C','Calle Lugar 3','Ciudad C','Estado C','33333','Tipo C',300,'Descripción del Lugar C');
 /*!40000 ALTER TABLE `lugares` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-19 20:29:53
+-- Dump completed on 2024-05-19 23:19:03

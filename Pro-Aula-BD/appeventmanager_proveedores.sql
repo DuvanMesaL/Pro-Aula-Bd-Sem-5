@@ -29,7 +29,7 @@ CREATE TABLE `proveedores` (
   `Tipo` varchar(50) DEFAULT NULL,
   `Descripcion` text,
   PRIMARY KEY (`ProveedorID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +38,7 @@ CREATE TABLE `proveedores` (
 
 LOCK TABLES `proveedores` WRITE;
 /*!40000 ALTER TABLE `proveedores` DISABLE KEYS */;
+INSERT INTO `proveedores` VALUES (1,'Proveedor A','contacto@proveedora.com','Tipo A','Descripción del Proveedor A'),(2,'Proveedor B','contacto@proveedorb.com','Tipo B','Descripción del Proveedor B'),(3,'Proveedor A','contacto@proveedora.com','Tipo A','Descripción del Proveedor A'),(4,'Proveedor B','contacto@proveedorb.com','Tipo B','Descripción del Proveedor B'),(5,'Proveedor C','contacto@proveedorc.com','Tipo C','Descripción del Proveedor C');
 /*!40000 ALTER TABLE `proveedores` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-19 20:29:52
+-- Dump completed on 2024-05-19 23:19:03

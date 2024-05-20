@@ -32,7 +32,7 @@ CREATE TABLE `empresasorganizadoras` (
   `CodigoPostal` varchar(10) DEFAULT NULL,
   `Descripcion` text,
   PRIMARY KEY (`EmpresaID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +41,7 @@ CREATE TABLE `empresasorganizadoras` (
 
 LOCK TABLES `empresasorganizadoras` WRITE;
 /*!40000 ALTER TABLE `empresasorganizadoras` DISABLE KEYS */;
+INSERT INTO `empresasorganizadoras` VALUES (1,'Empresa A','contacto@empresaa.com','Calle Empresa 1','Ciudad A','Estado A','11111','Descripción de Empresa A'),(2,'Empresa B','contacto@empresab.com','Calle Empresa 2','Ciudad B','Estado B','22222','Descripción de Empresa B'),(3,'Empresa A','contacto@empresaa.com','Calle Empresa 1','Ciudad A','Estado A','11111','Descripción de Empresa A'),(4,'Empresa B','contacto@empresab.com','Calle Empresa 2','Ciudad B','Estado B','22222','Descripción de Empresa B'),(5,'Empresa C','contacto@empresac.com','Calle Empresa 3','Ciudad C','Estado C','33333','Descripción de Empresa C');
 /*!40000 ALTER TABLE `empresasorganizadoras` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-19 20:29:52
+-- Dump completed on 2024-05-19 23:19:03

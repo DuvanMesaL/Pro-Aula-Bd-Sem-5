@@ -593,3 +593,198 @@ CALL InsertarPlanificacion(1, 1, 'Tipo C', 'Detalles de la Planificación C');
 CALL InsertarRolPermiso(1, 2);
 
 
+
+-- #### WAYS TO GET DATA ####
+-- 1. Basic Column Selection
+
+-- Select all columns
+SELECT * FROM Usuarios;
+SELECT * FROM Eventos;
+SELECT * FROM Proveedores;
+SELECT * FROM Lugares;
+SELECT * FROM EmpresasOrganizadoras;
+
+-- Select specific columns
+SELECT PrimerNombre, PrimerApellido FROM Usuarios;
+SELECT Nombre, Tipo FROM Eventos;
+SELECT Nombre, Correo FROM Proveedores;
+SELECT Nombre, Capacidad FROM Lugares;
+SELECT Nombre, Ciudad FROM EmpresasOrganizadoras;
+
+-- 2. Using Aliases for Columns and Tables
+
+-- Column aliases
+SELECT PrimerNombre AS Nombre, PrimerApellido AS Apellido FROM Usuarios;
+SELECT Nombre AS EventoNombre, Tipo AS EventoTipo FROM Eventos;
+SELECT Nombre AS ProveedorNombre, Correo AS ProveedorCorreo FROM Proveedores;
+SELECT Nombre AS LugarNombre, Capacidad AS LugarCapacidad FROM Lugares;
+SELECT Nombre AS EmpresaNombre, Ciudad AS EmpresaCiudad FROM EmpresasOrganizadoras;
+
+-- Table aliases
+SELECT u.PrimerNombre, u.PrimerApellido FROM Usuarios u;
+SELECT e.Nombre, e.Tipo FROM Eventos e;
+SELECT p.Nombre, p.Correo FROM Proveedores p;
+SELECT l.Nombre, l.Capacidad FROM Lugares l;
+SELECT eo.Nombre, eo.Ciudad FROM EmpresasOrganizadoras eo;
+
+-- 3. Filtering Results with WHERE
+
+-- Simple condition
+SELECT PrimerNombre, PrimerApellido FROM Usuarios WHERE Ciudad = 'Ciudad A';
+SELECT Nombre, Tipo FROM Eventos WHERE Tipo = 'Boda';
+SELECT Nombre, Correo FROM Proveedores WHERE Tipo = 'Fotógrafo';
+SELECT Nombre, Capacidad FROM Lugares WHERE Capacidad > 100;
+SELECT Nombre, Ciudad FROM EmpresasOrganizadoras WHERE Estado = 'Estado A';
+
+-- Compound condition
+SELECT PrimerNombre, PrimerApellido FROM Usuarios WHERE Ciudad = 'Ciudad A' AND Estado = 'Estado A';
+SELECT Nombre, Tipo FROM Eventos WHERE Tipo = 'Boda' OR Tipo = 'Cumpleaños';
+SELECT Nombre, Correo FROM Proveedores WHERE Tipo = 'Fotógrafo' AND Ciudad = 'Ciudad A';
+SELECT Nombre, Capacidad FROM Lugares WHERE Capacidad > 100 AND Estado = 'Estado A';
+SELECT Nombre, Ciudad FROM EmpresasOrganizadoras WHERE Estado = 'Estado A' AND CodigoPostal = '12345';
+
+-- 4. Ordering Results with ORDER BY
+
+-- Order ascending
+SELECT PrimerNombre, PrimerApellido FROM Usuarios ORDER BY PrimerApellido ASC;
+SELECT Nombre, Tipo FROM Eventos ORDER BY Fecha ASC;
+SELECT Nombre, Correo FROM Proveedores ORDER BY Nombre ASC;
+SELECT Nombre, Capacidad FROM Lugares ORDER BY Capacidad ASC;
+SELECT Nombre, Ciudad FROM EmpresasOrganizadoras ORDER BY Ciudad ASC;
+
+-- Order descending
+SELECT PrimerNombre, PrimerApellido FROM Usuarios ORDER BY PrimerApellido DESC;
+SELECT Nombre, Tipo FROM Eventos ORDER BY Fecha DESC;
+SELECT Nombre, Correo FROM Proveedores ORDER BY Nombre DESC;
+SELECT Nombre, Capacidad FROM Lugares ORDER BY Capacidad DESC;
+SELECT Nombre, Ciudad FROM EmpresasOrganizadoras ORDER BY Ciudad DESC;
+
+-- 5. Limiting Results with LIMIT
+
+-- Select a limited number of rows
+SELECT PrimerNombre, PrimerApellido FROM Usuarios LIMIT 10;
+SELECT Nombre, Tipo FROM Eventos LIMIT 5;
+SELECT Nombre, Correo FROM Proveedores LIMIT 8;
+SELECT Nombre, Capacidad FROM Lugares LIMIT 3;
+SELECT Nombre, Ciudad FROM EmpresasOrganizadoras LIMIT 7;
+
+-- Select a range of rows
+SELECT PrimerNombre, PrimerApellido FROM Usuarios LIMIT 5 OFFSET 10; -- From row 11 to row 15
+SELECT Nombre, Tipo FROM Eventos LIMIT 3 OFFSET 2; -- From row 3 to row 5
+SELECT Nombre, Correo FROM Proveedores LIMIT 4 OFFSET 1; -- From row 2 to row 5
+SELECT Nombre, Capacidad FROM Lugares LIMIT 6 OFFSET 3; -- From row 4 to row 9
+SELECT Nombre, Ciudad FROM EmpresasOrganizadoras LIMIT 2 OFFSET 5; -- From row 6 to row 7
+
+-- 6. Grouping Results with GROUP BY
+
+-- Group by a column
+SELECT Ciudad, COUNT(*) FROM Usuarios GROUP BY Ciudad;
+SELECT Tipo, COUNT(*) FROM Eventos GROUP BY Tipo;
+SELECT Tipo, COUNT(*) FROM Proveedores GROUP BY Tipo;
+SELECT Estado, COUNT(*) FROM Lugares GROUP BY Estado;
+SELECT Ciudad, COUNT(*) FROM EmpresasOrganizadoras GROUP BY Ciudad;
+
+-- Group and apply aggregation functions
+SELECT Ciudad, AVG(Edad) FROM Usuarios GROUP BY Ciudad;
+SELECT Tipo, COUNT(*) FROM Eventos GROUP BY Tipo;
+SELECT Tipo, SUM(Precio) FROM Proveedores GROUP BY Tipo;
+SELECT Estado, MAX(Capacidad) FROM Lugares GROUP BY Estado;
+SELECT Ciudad, MIN(Empleados) FROM EmpresasOrganizadoras GROUP BY Ciudad;
+
+-- 7. Filtering Groups with HAVING
+
+-- Using HAVING with GROUP BY
+SELECT Ciudad, COUNT(*) FROM Usuarios GROUP BY Ciudad HAVING COUNT(*) > 10;
+SELECT Tipo, COUNT(*) FROM Eventos GROUP BY Tipo HAVING COUNT(*) > 2;
+SELECT Tipo, COUNT(*) FROM Proveedores GROUP BY Tipo HAVING COUNT(*) > 5;
+SELECT Estado, COUNT(*) FROM Lugares GROUP BY Estado HAVING COUNT(*) > 3;
+SELECT Ciudad, COUNT(*) FROM EmpresasOrganizadoras GROUP BY Ciudad HAVING COUNT(*) > 1;
+
+-- 8. Joins to Combine Data from Multiple Tables
+
+-- INNER JOIN
+SELECT u.PrimerNombre, u.PrimerApellido, e.Nombre AS Evento
+FROM Usuarios u
+INNER JOIN Eventos e ON u.UsuarioID = e.ClienteID;
+
+SELECT e.Nombre AS Evento, l.Nombre AS Lugar
+FROM Eventos e
+INNER JOIN Lugares l ON e.LugarID = l.LugarID;
+
+SELECT p.Nombre AS Proveedor, eo.Nombre AS Empresa
+FROM Proveedores p
+INNER JOIN EmpresasOrganizadoras eo ON p.EmpresaID = eo.EmpresaID;
+
+SELECT u.PrimerNombre, u.PrimerApellido, r.Nombre AS Rol
+FROM Usuarios u
+INNER JOIN Roles r ON u.RolID = r.RolID;
+
+SELECT pp.Detalles, p.Nombre AS Proveedor
+FROM Planificaciones pp
+INNER JOIN Proveedores p ON pp.ProveedorID = p.ProveedorID;
+
+-- LEFT JOIN
+SELECT u.PrimerNombre, u.PrimerApellido, e.Nombre AS Evento
+FROM Usuarios u
+LEFT JOIN Eventos e ON u.UsuarioID = e.ClienteID;
+
+SELECT e.Nombre AS Evento, l.Nombre AS Lugar
+FROM Eventos e
+LEFT JOIN Lugares l ON e.LugarID = l.LugarID;
+
+SELECT p.Nombre AS Proveedor, eo.Nombre AS Empresa
+FROM Proveedores p
+LEFT JOIN EmpresasOrganizadoras eo ON p.EmpresaID = eo.EmpresaID;
+
+SELECT u.PrimerNombre, u.PrimerApellido, r.Nombre AS Rol
+FROM Usuarios u
+LEFT JOIN Roles r ON u.RolID = r.RolID;
+
+SELECT pp.Detalles, p.Nombre AS Proveedor
+FROM Planificaciones pp
+LEFT JOIN Proveedores p ON pp.ProveedorID = p.ProveedorID;
+
+-- RIGHT JOIN
+SELECT u.PrimerNombre, u.PrimerApellido, e.Nombre AS Evento
+FROM Usuarios u
+RIGHT JOIN Eventos e ON u.UsuarioID = e.ClienteID;
+
+SELECT e.Nombre AS Evento, l.Nombre AS Lugar
+FROM Eventos e
+RIGHT JOIN Lugares l ON e.LugarID = l.LugarID;
+
+SELECT p.Nombre AS Proveedor, eo.Nombre AS Empresa
+FROM Proveedores p
+RIGHT JOIN EmpresasOrganizadoras eo ON p.EmpresaID = eo.EmpresaID;
+
+SELECT u.PrimerNombre, u.PrimerApellido, r.Nombre AS Rol
+FROM Usuarios u
+RIGHT JOIN Roles r ON u.RolID = r.RolID;
+
+SELECT pp.Detalles, p.Nombre AS Proveedor
+FROM Planificaciones pp
+RIGHT JOIN Proveedores p ON pp.ProveedorID = p.ProveedorID;
+
+-- 9. Subqueries (Subconsultas)
+
+-- Subquery in SELECT
+SELECT u.PrimerNombre, u.PrimerApellido, 
+(SELECT COUNT(*) FROM Eventos e WHERE e.ClienteID = u.UsuarioID) AS TotalEventos
+FROM Usuarios u;
+
+SELECT e.Nombre, e.Fecha, 
+(SELECT l.Nombre FROM Lugares l WHERE l.LugarID = e.LugarID) AS LugarNombre
+FROM Eventos e;
+
+SELECT p.Nombre, p.Tipo, 
+(SELECT COUNT(*) FROM Planificaciones pp WHERE pp.ProveedorID = p.ProveedorID) AS TotalPlanificaciones
+FROM Proveedores p;
+
+SELECT l.Nombre, l.Capacidad, 
+(SELECT COUNT(*) FROM Eventos e WHERE e.LugarID = l.LugarID) AS TotalEventos
+FROM Lugares l;
+
+SELECT eo.Nombre, eo.Ciudad, 
+(SELECT COUNT(*) FROM Presupuestos p WHERE p.EmpresaID = eo.EmpresaID) AS TotalPresupuestos
+FROM EmpresasOrganizadoras eo;
+ 

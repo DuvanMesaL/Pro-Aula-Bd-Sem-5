@@ -30,7 +30,7 @@ CREATE TABLE `telefonosusuario` (
   PRIMARY KEY (`TelefonoID`),
   KEY `FK_TelefonosUsuario_Usuarios` (`UsuarioID`),
   CONSTRAINT `FK_TelefonosUsuario_Usuarios` FOREIGN KEY (`UsuarioID`) REFERENCES `usuarios` (`UsuarioID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +39,7 @@ CREATE TABLE `telefonosusuario` (
 
 LOCK TABLES `telefonosusuario` WRITE;
 /*!40000 ALTER TABLE `telefonosusuario` DISABLE KEYS */;
+INSERT INTO `telefonosusuario` VALUES (1,1,'1234567890','Móvil'),(2,2,'0987654321','Casa'),(3,1,'1234567890','Móvil'),(4,2,'0987654321','Casa'),(5,1,'1122334455','Trabajo');
 /*!40000 ALTER TABLE `telefonosusuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-19 20:29:52
+-- Dump completed on 2024-05-19 23:19:03

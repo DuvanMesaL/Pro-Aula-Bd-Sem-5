@@ -35,7 +35,7 @@ CREATE TABLE `eventos` (
   KEY `FK_Eventos_Usuarios` (`ClienteID`),
   CONSTRAINT `FK_Eventos_Lugares` FOREIGN KEY (`LugarID`) REFERENCES `lugares` (`LugarID`),
   CONSTRAINT `FK_Eventos_Usuarios` FOREIGN KEY (`ClienteID`) REFERENCES `usuarios` (`UsuarioID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,6 +44,7 @@ CREATE TABLE `eventos` (
 
 LOCK TABLES `eventos` WRITE;
 /*!40000 ALTER TABLE `eventos` DISABLE KEYS */;
+INSERT INTO `eventos` VALUES (1,'Evento A','Tipo A','2024-06-01',1,1,'Descripción del Evento A'),(2,'Evento B','Tipo B','2024-07-01',2,2,'Descripción del Evento B'),(3,'Evento A','Tipo A','2024-06-01',1,1,'Descripción del Evento A'),(4,'Evento B','Tipo B','2024-07-01',2,2,'Descripción del Evento B'),(5,'Evento C','Tipo C','2024-08-01',1,1,'Descripción del Evento C');
 /*!40000 ALTER TABLE `eventos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-19 20:29:53
+-- Dump completed on 2024-05-19 23:19:03

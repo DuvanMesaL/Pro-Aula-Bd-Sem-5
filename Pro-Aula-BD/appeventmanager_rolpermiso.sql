@@ -31,7 +31,7 @@ CREATE TABLE `rolpermiso` (
   KEY `FK_RolPermiso_Permisos` (`PermisoID`),
   CONSTRAINT `FK_RolPermiso_Permisos` FOREIGN KEY (`PermisoID`) REFERENCES `permisos` (`PermisoID`),
   CONSTRAINT `FK_RolPermiso_Roles` FOREIGN KEY (`RolID`) REFERENCES `roles` (`RolID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +40,7 @@ CREATE TABLE `rolpermiso` (
 
 LOCK TABLES `rolpermiso` WRITE;
 /*!40000 ALTER TABLE `rolpermiso` DISABLE KEYS */;
+INSERT INTO `rolpermiso` VALUES (1,1,1),(2,2,2),(3,1,1),(4,2,2),(5,1,2);
 /*!40000 ALTER TABLE `rolpermiso` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-19 20:29:53
+-- Dump completed on 2024-05-19 23:19:03

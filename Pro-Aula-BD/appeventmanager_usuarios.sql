@@ -38,7 +38,7 @@ CREATE TABLE `usuarios` (
   PRIMARY KEY (`UsuarioID`),
   KEY `FK_Usuarios_Roles` (`RolID`),
   CONSTRAINT `FK_Usuarios_Roles` FOREIGN KEY (`RolID`) REFERENCES `roles` (`RolID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,6 +47,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (1,'Juan','Carlos','Pérez','García','juan.perez@example.com','password123','Calle Falsa 123','Ciudad','Estado','12345',1),(2,'María','Luisa','Martínez','López','maria.martinez@example.com','password123','Avenida Siempre Viva 742','Otra Ciudad','Otro Estado','54321',2),(3,'Juan','Carlos','Pérez','García','juan.perez@example.com','password123','Calle Falsa 123','Ciudad','Estado','12345',1),(4,'María','Luisa','Martínez','López','maria.martinez@example.com','password123','Avenida Siempre Viva 742','Otra Ciudad','Otro Estado','54321',2),(5,'Luis','Fernando','Gómez','Pérez','luis.gomez@example.com','password123','Calle Nueva 123','Ciudad X','Estado Y','67890',1);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-19 20:29:52
+-- Dump completed on 2024-05-19 23:19:02

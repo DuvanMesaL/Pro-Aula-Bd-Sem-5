@@ -34,7 +34,7 @@ CREATE TABLE `presupuestos` (
   KEY `FK_Presupuestos_EmpresasOrganizadoras` (`EmpresaID`),
   CONSTRAINT `FK_Presupuestos_EmpresasOrganizadoras` FOREIGN KEY (`EmpresaID`) REFERENCES `empresasorganizadoras` (`EmpresaID`),
   CONSTRAINT `FK_Presupuestos_Eventos` FOREIGN KEY (`EventoID`) REFERENCES `eventos` (`EventoID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,6 +43,7 @@ CREATE TABLE `presupuestos` (
 
 LOCK TABLES `presupuestos` WRITE;
 /*!40000 ALTER TABLE `presupuestos` DISABLE KEYS */;
+INSERT INTO `presupuestos` VALUES (1,1,1,1000.00,'2024-05-19','Presupuesto para Evento A'),(2,2,2,2000.00,'2024-05-20','Presupuesto para Evento B'),(3,1,1,1000.00,'2024-05-19','Presupuesto para Evento A'),(4,2,2,2000.00,'2024-05-20','Presupuesto para Evento B'),(5,1,1,1500.00,'2024-06-19','Presupuesto para Evento C');
 /*!40000 ALTER TABLE `presupuestos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-19 20:29:53
+-- Dump completed on 2024-05-19 23:19:03
